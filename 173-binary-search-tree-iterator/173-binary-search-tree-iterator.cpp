@@ -10,39 +10,28 @@
  * };
  */
 class BSTIterator {
+private: stack<TreeNode*> ans;
 public:
-    vector<int> ans;
-    int i=0;
-    void inorderTraversal(TreeNode* root) {
-        stack<TreeNode*> s;
-        TreeNode* node=root;
-        while(true)
-        {
-            if(node!=NULL)
-            {
-                s.push(node);
-                node=node->left;
-            }
-            else
-            {
-                if(s.empty()) break;
-                node=s.top();
-                s.pop();
-                ans.push_back(node->val);
-                node=node->right;
-            }
-        }
-    }
+    
     BSTIterator(TreeNode* root) {
-        inorderTraversal(root);
+        pushAll(root);
     }
     
     int next() {
-        return ans[i++];
+        TreeNode* node=ans.top();
+        ans.pop();
+        // Push all right nodes of poped node
+        pushAll(node->right);
+        return node->val;
     }
     
     bool hasNext() {
-        return (i!=ans.size());
+        return !ans.empty();
+    }
+    void pushAll(TreeNode* root)
+    {   
+        // Push all left nodes of a given node in stack
+        for(;root!=NULL;ans.push(root),root=root->left);
     }
 };
 
