@@ -1,24 +1,19 @@
 class Solution {
 public:
-    bool bipartiteBfs(int i, vector<vector<int>>& graph, vector<int>&color)
+    bool bipartiteDfs(int node, vector<vector<int>>& graph, vector<int>&color)
     {
-        queue<int> q;
-        color[i]=1;
-        q.push(i);
-        while(!q.empty())
+        if(color[node]==-1)
+            color[node]=1;
+        for(auto it:graph[node])
         {
-            int node=q.front();
-            q.pop();
-            for(auto it:graph[node])
+            if(color[it]==-1)
             {
-                if(color[it]==-1)
-                {
-                    q.push(it);
-                    color[it]=1-color[node];
-                }
-                else if(color[it]==color[node])
+                color[it]=1-color[node];
+                if(!bipartiteDfs(it,graph,color))
                     return false;
             }
+            else if(color[it]==color[node])
+                return false;
         }
         return true;
     }
@@ -29,7 +24,7 @@ public:
         for(int i=0;i<V;i++)
         {
             if(color[i]==-1)
-                if(!bipartiteBfs(i,graph,color))
+                if(!bipartiteDfs(i,graph,color))
                     return false;
         }
         return true;
