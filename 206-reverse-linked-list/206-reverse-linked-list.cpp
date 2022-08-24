@@ -14,14 +14,11 @@ public:
         ListNode *prev=NULL,*next=head;
         while(next!=NULL)
         {
-            cout<<head->val<<" ";
             next=head->next;
-            //cout<<next->val<<" ";
             head->next=prev;
             prev=head;
-            if(next!=NULL)
-                head=next;
+            head=next;
         }
-        return head;
+        return prev;
     }
 };
