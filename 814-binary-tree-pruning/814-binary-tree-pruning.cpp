@@ -11,22 +11,11 @@
  */
 class Solution {
 public:
-    bool traverse(TreeNode* root)
-    {
-        if(!root)
-            return false;
-        bool left=traverse(root->left);
-        bool right=traverse(root->right);
-        if(left==false)
-            root->left=NULL;
-        if(right==false)
-            root->right=NULL;
-        return root->val==1 | left | right;
-    }
     TreeNode* pruneTree(TreeNode* root) {
-        bool t=traverse(root);
-        if(!t)
-            return NULL;
+        if (!root) return NULL;
+        root->left = pruneTree(root->left);
+        root->right = pruneTree(root->right);
+        if (!root->left && !root->right && root->val == 0) return NULL;
         return root;
     }
 };
