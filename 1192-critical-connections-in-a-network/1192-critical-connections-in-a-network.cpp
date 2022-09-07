@@ -12,17 +12,10 @@ public:
                 dfs(it,node,vis,tin,low,timer,adj,ans);
                 low[node]=min(low[node],low[it]);
                 if(low[it]>tin[node])
-                {   
-                    vector<int> temp;
-                    temp.push_back(node);
-                    temp.push_back(it);
-                    ans.push_back(temp);
-                }
+                    ans.push_back(vector<int>{node,it});
             }
             else
-            {
                 low[node]=min(low[node],tin[it]);
-            }
         }
     }
     vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
