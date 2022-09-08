@@ -11,29 +11,21 @@
  */
 class Solution {
 public:
+    void traverse(TreeNode* root, int level, vector<vector<int>>& ans)
+    {
+        if(!root) return;
+        
+        if(ans.size()==level)
+            ans.push_back(vector<int>{root->val});
+        else
+            ans[level].push_back(root->val);
+        
+        traverse(root->left,level+1,ans);
+        traverse(root->right,level+1,ans);
+    }
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>>ans;
-        if(!root)   
-            return ans;
-
-        queue<TreeNode *>q;
-        q.push(root);
-        while(!q.empty())
-        {
-            int s=q.size();
-            vector<int>t;
-            for(int i=0;i<s;i++)
-            {
-                TreeNode *temp=q.front();
-                q.pop();
-                t.push_back(temp->val);
-                if(temp->left)
-                    q.push(temp->left);
-                if(temp->right)
-                    q.push(temp->right);
-            }
-            ans.push_back(t);
-        }
+        vector<vector<int>> ans;
+        traverse(root,0,ans);
         return ans;
     }
 };
