@@ -31,9 +31,14 @@ public:
     void pushAll(TreeNode* root)
     {   
         // Push all left nodes of a given node in stack
-        for(;root!=NULL;ans.push(root),root=root->left);
+        while(root!=NULL)
+        {
+            ans.push(root);
+            root=root->left;
+        }
     }
 };
+
 
 /**
  * Your BSTIterator object will be instantiated and called as such:
