@@ -38,3 +38,4 @@ public:
         return answer;
     }
 };
+//https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/discuss/2268897/C%2B%2B-Brute-Force-or-DFS-with-a-easy-trick
