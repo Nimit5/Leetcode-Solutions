@@ -1,4 +1,7 @@
-class Solution:
-    def average(self, salary: List[int]) -> float:
-        salary.sort()
-        return sum(salary[1:-1])/len(salary[1:-1])
+class Solution {
+public:
+    double average(vector<int>& s) {
+        return (accumulate(begin(s), end(s), 0.) - *min_element(begin(s), end(s)) 
+        - *max_element(begin(s), end(s))) / (s.size() - 2);
+    }
+};
